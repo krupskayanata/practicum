@@ -1,4 +1,4 @@
-package animals;
+package animals.model;
 
 public class Animal {
 
@@ -7,6 +7,13 @@ public class Animal {
     private int age;
     private double weight;
     private String color;
+
+    public Animal(String name, int age, double weight, String color) {
+        this.name = name;
+        this.age = age;
+        this.weight = weight;
+        this.color = color;
+    }
 
     public String getName() {
         return name;
@@ -66,7 +73,7 @@ public class Animal {
             years = getYearWord(age);
         }
 
-        return "Привет! Меня зовут " + name + ", мне " + age + years;
+        return "Привет! Меня зовут " + name + ", мне " + age + years + ", я вешу - " + weight + " кг, мой цвет - " + color;
     }
 
     private String getYearWord(int age) {
@@ -84,12 +91,3 @@ public class Animal {
     }
 
 }
-
-
-
-
-
-
-
-
-
