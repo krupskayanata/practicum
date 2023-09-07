@@ -14,36 +14,45 @@ public class Main {
     public static void main(String[] args) {
 
         List<Animal> animals = new ArrayList<>();
-        boolean interrupt = false;
         do {
-            System.out.println("Выберите одну из команд: add/list/exit");
+            System.out.println("Выберите одну из команд: ADD/LIST/EXIT");
             Scanner scanner = new Scanner(System.in);
             String command = scanner.nextLine();
             System.out.println("Вы ввели " + command);
-            if (CommandType.ADD.name().equalsIgnoreCase(command.trim())) {
-                System.out.println("Какое животное добавить: cat/dog/duck");
-                scanner = new Scanner(System.in);
-                command = scanner.nextLine();
-                if (AnimalType.CAT.name().equalsIgnoreCase(command.trim())) {
-                    Animal animal = validateAndCreate(AnimalType.CAT, InputHelper.inputAnimalType(System.in));
-                    animals.add(animal);
-                } else if (AnimalType.DOG.name().equalsIgnoreCase(command.trim())) {
-                    Animal animal = validateAndCreate(AnimalType.DOG, InputHelper.inputAnimalType(System.in));
-                    animals.add(animal);
-                } else if (AnimalType.DUCK.name().equalsIgnoreCase(command.trim())) {
-                    Animal animal = validateAndCreate(AnimalType.DUCK, InputHelper.inputAnimalType(System.in));
-                    animals.add(animal);
-                } else {
-                    System.out.println("Животного не найдено " + command.trim());
-                }
-            } else if (CommandType.LIST.name().equalsIgnoreCase(command.trim())) {
-                for(Animal animal : animals) {
-                    System.out.println(animal.toString());
-                }
-            } else if (CommandType.EXIT.name().equalsIgnoreCase(command.trim())) {
-                return;
+            switch (command.trim().toUpperCase()) {
+                case (CommandType.ADD) :
+                    System.out.println("Какое животное добавить: CAT/DOG/DUCK");
+                    scanner = new Scanner(System.in);
+                    command = scanner.nextLine();
+                    switch (command.trim().toUpperCase()) {
+                        case (AnimalType.CAT) :
+                            Animal animal = validateAndCreate(AnimalType.CAT, InputHelper.inputAnimalType(System.in));
+                            animals.add(animal);
+                            break;
+                        case (AnimalType.DOG) :
+                            Animal dog = validateAndCreate(AnimalType.DOG, InputHelper.inputAnimalType(System.in));
+                            animals.add(dog);
+                            break;
+                        case (AnimalType.DUCK) :
+                            Animal duck = validateAndCreate(AnimalType.DUCK, InputHelper.inputAnimalType(System.in));
+                            animals.add(duck);
+                            break;
+                        default:
+                            System.out.println("Введенный тип животного не найден [" + command.trim() + "]. Введите повторно");
+                            break;
+                    }
+                    break;
+                case (CommandType.LIST) :
+                    for(Animal animal : animals) {
+                        System.out.println(animal.toString());
+                    }
+                    break;
+                case (CommandType.EXIT) :
+                    System.exit(0);
+                default:
+                    System.out.println("Выбрана некорректная команда. Введите команду повторно.");
             }
-        } while (!interrupt);
+        } while (true);
 
     }
 }

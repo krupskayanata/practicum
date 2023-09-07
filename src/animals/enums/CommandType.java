@@ -1,5 +1,7 @@
 package animals.enums;
 
-public enum CommandType {
-    ADD, LIST, EXIT
+public class CommandType {
+    public static final String ADD = "ADD";
+    public static final String LIST = "LIST";
+    public static final String EXIT = "EXIT";
 }

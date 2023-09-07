@@ -24,32 +24,36 @@ public class InputHelper {
         return command.split("\\s+");
     }
 
-    public static Animal validateAndCreate(AnimalType animalType, String[] inputText) {
-        if (inputText == null || inputText.length != 4) {
-            throw new AnimalValidationParameterException("Введено некорректное количество параметров. Должно быть 4.");
-        }
-        int age = 0;
-
+    public static Animal validateAndCreate(String animalType, String[] inputText) {
         try {
-            age = Integer.parseInt(inputText[1].trim());
-        } catch (Exception e) {
-            throw new AnimalValidationParameterException("Введен некорректный возраст.");
-        }
+            if (inputText == null || inputText.length != 4) {
+                throw new AnimalValidationParameterException("Введено некорректное количество параметров. Должно быть 4.");
+            }
+            int age = 0;
 
-        int weight = 0;
-        try {
-            weight = Integer.parseInt(inputText[2].trim());
-        } catch (Exception e) {
-            throw new AnimalValidationParameterException("Введен некорректный возраст.");
-        }
-        if (animalType.equals(AnimalType.CAT)) {
-            return new Cat(inputText[0], age, weight, inputText[3]);
-        } else if (animalType.equals(AnimalType.DOG)) {
-            return new Dog(inputText[0], age, weight, inputText[3]);
-        } else if (animalType.equals(AnimalType.DUCK)) {
-            return new Duck(inputText[0], age, weight, inputText[3]);
-        }
+            try {
+                age = Integer.parseInt(inputText[1].trim());
+            } catch (Exception e) {
+                throw new AnimalValidationParameterException("Введен некорректный возраст.");
+            }
 
+            int weight = 0;
+            try {
+                weight = Integer.parseInt(inputText[2].trim());
+            } catch (Exception e) {
+                throw new AnimalValidationParameterException("Введен некорректный возраст.");
+            }
+            if (animalType.equals(AnimalType.CAT)) {
+                return new Cat(inputText[0], age, weight, inputText[3]);
+            } else if (animalType.equals(AnimalType.DOG)) {
+                return new Dog(inputText[0], age, weight, inputText[3]);
+            } else if (animalType.equals(AnimalType.DUCK)) {
+                return new Duck(inputText[0], age, weight, inputText[3]);
+            }
+
+        } catch (AnimalValidationParameterException e) {
+            System.out.println(e.getMessage());
+        }
         return null;
 
 
